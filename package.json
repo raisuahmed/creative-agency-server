@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rais U Ahmed",
@@ -16,5 +18,8 @@
     "express-fileupload": "^1.2.0",
     "firebase-admin": "^9.2.0",
     "mongodb": "^3.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

@@ -6,7 +6,8 @@ const fileUpload = require('express-fileupload')
 const admin = require('firebase-admin');
 const ObjectId = require('mongodb').ObjectId;
 require('dotenv').config();
-
+const uri = "mongodb+srv://CreativeAgencyDbUser:SlaoUASA9AmfVVHF@cluster0.pdeuw.mongodb.net/CreativeAgencyDbDb?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true,  useUnifiedTopology: true  });
 // use app
 const app = express()
 app.use(bodyParser.urlencoded({
@@ -24,13 +25,13 @@ admin.initializeApp({
   databaseURL: process.env.FIRE_DB
 });
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.bw56e.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
 client.connect(err => {
-  const ServiceCollection = client.db("creativeAgency").collection("services");
-  const UserServiceCollection = client.db("creativeAgency").collection("userServices");
-  const UserReviewCollection = client.db("creativeAgency").collection("userReview");
-  const AdminsCollection = client.db("creativeAgency").collection("admins");
+  const ServiceCollection = client.db("CreativeAgencyDb").collection("CreativeAgencyBd");
+  console.log('database Connected');
+  const UserServiceCollection = client.db("CreativeAgencyDb").collection("userServices");
+  const UserReviewCollection = client.db("CreativeAgencyDb").collection("userReview");
+  const AdminsCollection = client.db("CreativeAgencyDb").collection("admins");
 
   // Show Services in the home page
   app.get('/getServices', (req, res) => {
@@ -162,4 +163,4 @@ client.connect(err => {
 
 });
 
-app.listen(process.env.PORT || 4000);
+app.listen(process.env.PORT || 5000);
