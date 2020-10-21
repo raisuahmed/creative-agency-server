@@ -18,7 +18,7 @@ app.use(cors())
 app.use(express.static('servicePhoto'))
 app.use(fileUpload())
 
-const serviceAccount = require("./creative-agency-a1c8c-firebase-adminsdk-dwuw0-319af5f287.json");
+const serviceAccount = require("./creative-agency-83-firebase-adminsdk-dwuw0-319af5f287.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -33,14 +33,14 @@ client.connect(err => {
   const UserReviewCollection = client.db("CreativeAgencyDb").collection("userReview");
   const AdminsCollection = client.db("CreativeAgencyDb").collection("admins");
 
-  // Show Services in the home page
+  //  Services in the home page
   app.get('/getServices', (req, res) => {
     Collection.find({})
       .toArray((err, documents) => {
         res.send(documents)
       })
   });
-  //  Add Order in the home page
+  //  Order in the home page
   app.post('/addOrder', (req, res) => {
     const file = req.files.file;
     const name = req.body.name;
@@ -100,7 +100,7 @@ client.connect(err => {
         res.send(documents)
       })
   });
-  // Show AllServices in the home page
+  //  AllServices in the home page
   app.get('/getAllServices', (req, res) => {
     UserServiceCollection.find({})
       .toArray((err, documents) => {
@@ -163,4 +163,4 @@ client.connect(err => {
 
 });
 
-app.listen(process.env.PORT || 5000);
+app.listen( 5000);
