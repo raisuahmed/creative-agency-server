@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const MongoClient = require('mongodb').MongoClient;
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileUpload')
 const admin = require('firebase-admin');
 const ObjectId = require('mongodb').ObjectId;
 require('dotenv').config();
@@ -27,7 +27,7 @@ admin.initializeApp({
 
 
 client.connect(err => {
-  const ServiceCollection = client.db("CreativeAgencyDb").collection("CreativeAgencyBd");
+  const Collection = client.db("CreativeAgencyDb").collection("CreativeAgencyBd");
   console.log('database Connected');
   const UserServiceCollection = client.db("CreativeAgencyDb").collection("userServices");
   const UserReviewCollection = client.db("CreativeAgencyDb").collection("userReview");
@@ -35,7 +35,7 @@ client.connect(err => {
 
   // Show Services in the home page
   app.get('/getServices', (req, res) => {
-    ServiceCollection.find({})
+    Collection.find({})
       .toArray((err, documents) => {
         res.send(documents)
       })
@@ -120,7 +120,7 @@ client.connect(err => {
       size: file.size,
       img: Buffer.from(encImg, 'base64')
     };
-    ServiceCollection.insertOne({ image, title, description })
+    Collection.insertOne({ image, title, description })
       .then(result => {
         res.send(result.insertedCount > 0)
       })
